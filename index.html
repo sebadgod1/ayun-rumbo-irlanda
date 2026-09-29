@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#E5C5C1">
+  <meta name="description" content="Ayün — una compañera de camino rumbo a Irlanda.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Ayün">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icon.svg">
+  <link rel="stylesheet" href="./styles.css?v=1.0.0">
+  <title>Ayün — Rumbo a Irlanda</title>
+</head>
+<body>
+  <main class="app-shell">
+    <section class="view active" id="view-today">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">RUMBO A IRLANDA <span aria-hidden="true">🇮🇪</span></p>
+          <h1>Ayün — Tu camino</h1>
+        </div>
+        <div class="date-pill" id="today-date"></div>
+      </header>
+
+      <section class="hero-card">
+        <div class="ring-wrap" aria-label="Progreso de hoy">
+          <svg class="progress-ring" viewBox="0 0 120 120" role="img">
+            <circle class="ring-bg" cx="60" cy="60" r="50"></circle>
+            <circle class="ring-value" id="ring-value" cx="60" cy="60" r="50"></circle>
+          </svg>
+          <div class="ring-copy"><strong id="daily-percent">0%</strong><span>HOY</span></div>
+        </div>
+
+        <div class="hero-copy">
+          <div class="ayun-id">
+            <img src="./assets/ayun-avatar.svg" alt="Avatar ilustrado de Ayün">
+            <div><strong>AYÜN</strong><span>TU COMPAÑERA DE CAMINO</span></div>
+          </div>
+          <h2 id="ayun-title">Vamos paso a paso.</h2>
+          <p id="ayun-message">No necesitas hacerlo todo de una. Empieza por una cosa pequeña.</p>
+
+          <div class="hero-stats">
+            <article><strong id="days-left">—</strong><span>días<br>para Irlanda</span></article>
+            <article><strong id="streak">0</strong><span>racha<br>actual</span></article>
+            <article><strong id="xp-today">0</strong><span>XP<br>hoy</span></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading"><div><h2>Tus esenciales</h2><p>Seis gestos simples para cuidarte hoy.</p></div><strong id="habit-count">0/6</strong></div>
+        <div id="habit-list" class="habit-list"></div>
+      </section>
+
+      <section class="section-block training-block">
+        <div class="section-heading"><div><h2>Movimiento de la semana</h2><p>Constancia antes que perfección.</p></div><span id="week-range"></span></div>
+        <div id="training-list" class="training-list"></div>
+      </section>
+
+      <section class="soft-grid">
+        <article class="soft-card">
+          <div class="soft-title"><span>🥗</span><div><h3>Cómo comiste hoy</h3><p>Sin calorías, sin culpa.</p></div></div>
+          <div class="choice-row" id="food-choices">
+            <button data-food="nourishing">Nutritiva</button>
+            <button data-food="mixed">Mixta</button>
+            <button data-food="heavy">Más pesada</button>
+          </div>
+        </article>
+
+        <article class="soft-card">
+          <div class="soft-title"><span>♡</span><div><h3>Cómo te sentiste</h3><p>Solo para conocerte mejor.</p></div></div>
+          <div class="mood-row" id="mood-choices">
+            <button data-mood="1" aria-label="Ánimo 1">😞</button>
+            <button data-mood="2" aria-label="Ánimo 2">😕</button>
+            <button data-mood="3" aria-label="Ánimo 3">😐</button>
+            <button data-mood="4" aria-label="Ánimo 4">🙂</button>
+            <button data-mood="5" aria-label="Ánimo 5">✨</button>
+          </div>
+          <textarea id="mood-note" rows="2" maxlength="300" placeholder="Si quieres, deja una notita…"></textarea>
+        </article>
+      </section>
+
+      <article class="reflection-card">
+        <label for="reflection"><span>CIERRE DEL DÍA</span><strong>Algo que quieras recordar</strong></label>
+        <textarea id="reflection" rows="3" maxlength="600" placeholder="Una línea para tu yo del futuro…"></textarea>
+        <small>Se guarda automáticamente</small>
+      </article>
+    </section>
+
+    <section class="view" id="view-progress">
+      <header class="page-header"><p>PROGRESO</p><h1>Tu constancia, sin ruido.</h1></header>
+      <div class="metric-grid">
+        <article><span>DÍAS GANADOS</span><strong id="metric-wins">0</strong></article>
+        <article><span>MEJOR RACHA</span><strong id="metric-best">0</strong></article>
+        <article><span>XP TOTAL</span><strong id="metric-xp">0</strong></article>
+        <article><span>NIVEL</span><strong id="metric-level">1</strong></article>
+      </div>
+      <article class="progress-card"><div class="progress-head"><div><span>NIVEL ACTUAL</span><strong id="level-copy">Nivel 1</strong></div><small id="level-next">250 XP para el siguiente</small></div><div class="bar"><span id="level-bar"></span></div></article>
+      <article class="progress-card"><h2>Movimiento esta semana</h2><div id="progress-training"></div></article>
+      <article class="progress-card"><h2>Bienestar registrado</h2><div class="wellbeing-summary"><div><strong id="food-days">0</strong><span>días con alimentación registrada</span></div><div><strong id="mood-days">0</strong><span>días con ánimo registrado</span></div></div></article>
+    </section>
+
+    <section class="view" id="view-calendar">
+      <header class="page-header"><p>CALENDARIO</p><h1>Tu camino día a día.</h1></header>
+      <article class="calendar-card"><div class="calendar-head"><button id="prev-month" aria-label="Mes anterior">‹</button><h2 id="calendar-month"></h2><button id="next-month" aria-label="Mes siguiente">›</button></div><div class="weekdays"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div><div id="calendar-grid" class="calendar-grid"></div><div class="calendar-legend"><span><i class="won"></i>6/6</span><span><i class="partial"></i>Parcial</span><span><i></i>Sin registro</span></div></article>
+      <article id="day-detail" class="day-detail"><p>Toca un día para ver su detalle.</p></article>
+    </section>
+
+    <section class="view" id="view-settings">
+      <header class="page-header"><p>AJUSTES</p><h1>Tus datos son tuyos.</h1></header>
+      <article class="settings-card"><h2>Respaldo</h2><button id="export-json">Exportar respaldo JSON <span>›</span></button><label for="import-json">Importar respaldo JSON <span>›</span></label><input id="import-json" type="file" accept="application/json,.json" hidden><button id="export-csv">Exportar CSV <span>›</span></button></article>
+      <article class="settings-card"><h2>Reinicio</h2><button id="reset-today">Reiniciar solo hoy <span>›</span></button><button id="reset-all" class="danger">Borrar todo <span>›</span></button></article>
+      <article class="health-note"><strong>Sobre vitaminas y medicamentos</strong><p>Ayün solo registra si seguiste tu pauta habitual. No recomienda dosis, horarios ni cambios de tratamiento.</p></article>
+      <p class="version">AYÜN — RUMBO A IRLANDA · v1.0.0</p>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Navegación principal">
+    <button class="nav-item active" data-view="today"><span>⌂</span><small>Hoy</small></button>
+    <button class="nav-item" data-view="progress"><span>◫</span><small>Progreso</small></button>
+    <button class="nav-item" data-view="calendar"><span>□</span><small>Calendario</small></button>
+    <button class="nav-item" data-view="settings"><span>⚙</span><small>Ajustes</small></button>
+  </nav>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"><span id="toast-message"></span><button id="undo-button">DESHACER</button></div>
+  <aside id="update-banner" class="update-banner" hidden><span>Nueva versión disponible</span><button id="apply-update">ACTUALIZAR</button></aside>
+
+  <script src="./core.js?v=1.0.0" defer></script>
+  <script src="./app.js?v=1.0.0" defer></script>
+</body>
+</html>
