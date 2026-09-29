@@ -1,0 +1,14 @@
+{
+  "id": "/ayun-rumbo-irlanda/",
+  "name": "Ayün — Rumbo a Irlanda",
+  "short_name": "Ayün",
+  "description": "Tu compañera de camino rumbo a Irlanda.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F4E1E0",
+  "theme_color": "#E5C5C1",
+  "orientation": "portrait-primary",
+  "lang": "es",
+  "icons": [{"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
