@@ -1,0 +1,16 @@
+const assert = require('assert');
+const C = require('../core.js');
+const d = C.emptyDay();
+assert.strictEqual(C.completedCount(d), 0);
+C.HABITS.forEach(id => { d.habits[id] = true; });
+assert.strictEqual(C.dayPercent(d), 100);
+assert.strictEqual(C.dayWon(d), true);
+assert.strictEqual(C.dayXp(d), 80);
+d.trainings = ['bike','strength'];
+assert.strictEqual(C.trainingXp(d), 55);
+assert.strictEqual(C.totalDayXp(d), 135);
+const state = {'2026-09-27': C.normalizeDay({habits:Object.fromEntries(C.HABITS.map(id=>[id,true]))}),'2026-09-28': C.normalizeDay({habits:Object.fromEntries(C.HABITS.map(id=>[id,true]))})};
+assert.strictEqual(C.consecutiveWonDays(state,'2026-09-28'), 2);
+assert.strictEqual(C.bestStreak(state), 2);
+assert.deepStrictEqual(C.levelFromXp(260), {level:2,current:10,next:250,percent:4});
+console.log('Ayün core tests OK');
