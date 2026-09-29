@@ -1,0 +1,148 @@
+/* Ayün v1.0.1 — Dark Soft
+   Menos brillo, misma identidad: rosa palo + navy + mauve, pensada para cansar menos la vista. */
+:root{
+  --rose:#D6B2AF;
+  --blush:#211A22;
+  --mauve:#9A707A;
+  --prune:#C99CA4;
+  --navy:#0F1624;
+  --ink:#EEF2F6;
+  --muted:#AFA6AD;
+  --card:#172130;
+  --line:rgba(214,178,175,.12);
+  --green:#78B991;
+  --shadow:0 20px 52px rgba(0,0,0,.30);
+}
+html{background:#0F1624}
+body{
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 50% -8%,rgba(154,112,122,.10),transparent 31%),
+    linear-gradient(180deg,#101826 0%,#121B2A 44%,#0D1521 100%);
+}
+
+/* Tipografía y encabezados */
+.topbar h1,.page-header h1,.hero-copy h2,.ayun-id strong,.ring-copy strong,
+.hero-stats strong,.section-heading h2,.habit-copy strong,.training-copy strong,
+.soft-title h3,.reflection-card label strong,.metric-grid strong,.progress-card h2,
+.progress-head strong,.training-progress-row strong,.wellbeing-summary strong,
+.calendar-head h2,.day-detail h3,.settings-card h2,.health-note strong{color:var(--ink)}
+.eyebrow,.page-header p,.ayun-id span,.section-heading>strong,.metric-grid span,
+.progress-head span,.training-progress-row span,.reflection-card label span{color:#CBA2A8}
+.date-pill{
+  background:rgba(255,255,255,.035);
+  color:#D8D0D5;
+  border-color:rgba(214,178,175,.11);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+
+/* Hero */
+.hero-card{
+  background:
+    radial-gradient(circle at 86% 4%,rgba(214,178,175,.07),transparent 30%),
+    linear-gradient(145deg,rgba(26,37,54,.98),rgba(52,39,48,.97));
+  border-color:rgba(214,178,175,.11);
+  box-shadow:var(--shadow);
+}
+.hero-card:after{background:rgba(214,178,175,.055)}
+.ring-bg{stroke:rgba(214,178,175,.13)}
+.ring-value{stroke:#D6B2AF}
+.hero-copy>p{color:#D2C9CF}
+.hero-stats article{
+  background:rgba(255,255,255,.035);
+  border-color:rgba(214,178,175,.10);
+}
+.hero-stats span,.ring-copy span{color:#AAA2A9}
+.ayun-id img{box-shadow:0 10px 24px rgba(0,0,0,.22)}
+
+/* Tarjetas principales */
+.habit-card,.training-card,.soft-card,.reflection-card,.progress-card,
+.calendar-card,.day-detail,.settings-card,.health-note,.metric-grid article{
+  background:rgba(23,33,48,.92);
+  border-color:rgba(214,178,175,.11);
+  box-shadow:0 10px 28px rgba(0,0,0,.16);
+  color:var(--ink);
+}
+.habit-card .icon,.soft-title>span{
+  background:rgba(214,178,175,.10);
+}
+.heart{
+  color:#D6B2AF;
+  background:rgba(255,255,255,.025);
+  border-color:rgba(214,178,175,.13);
+}
+.habit-card.done{
+  border-color:rgba(120,185,145,.32);
+  background:linear-gradient(145deg,rgba(23,33,48,.96),rgba(20,44,38,.90));
+}
+.habit-card.done .heart,.training-toggle.done{
+  background:rgba(120,185,145,.18);
+  color:#98D0AD;
+  border-color:rgba(120,185,145,.25);
+}
+
+/* Controles */
+.training-toggle,.choice-row button,.mood-row button,.calendar-head button{
+  background:rgba(255,255,255,.025);
+  color:#D8D0D5;
+  border-color:rgba(214,178,175,.12);
+}
+.choice-row button.active,.mood-row button.active{
+  background:#86656E;
+  color:#FFF;
+  border-color:#86656E;
+}
+.soft-card textarea,.reflection-card textarea{
+  background:rgba(255,255,255,.025);
+  color:var(--ink);
+  border-color:rgba(214,178,175,.11);
+}
+.soft-card textarea::placeholder,.reflection-card textarea::placeholder{color:#8F878E}
+.mini-bar,.bar{background:rgba(214,178,175,.08)}
+.mini-bar span,.bar span{background:#9A707A}
+.wellbeing-summary div,.detail-list span{background:rgba(214,178,175,.07)}
+
+/* Calendario: estados menos luminosos */
+.calendar-day{
+  background:rgba(214,178,175,.075);
+  color:#AAA2A9;
+}
+.calendar-day.won{
+  background:rgba(120,185,145,.18);
+  color:#A9D4B8;
+}
+.calendar-day.partial{
+  background:rgba(214,178,175,.16);
+  color:#E5D4D8;
+}
+.calendar-day.today{outline:2px solid #A97D86}
+.calendar-day.selected{box-shadow:inset 0 0 0 2px #E7D6DA}
+.calendar-legend i{background:rgba(214,178,175,.16)}
+.calendar-legend i.won{background:#6F9E82}
+.calendar-legend i.partial{background:#9A707A}
+.detail-list span.done{color:#9FD0B1}
+
+/* Navegación y overlays */
+.bottom-nav{
+  background:rgba(9,15,25,.93);
+  border-top-color:rgba(214,178,175,.10);
+}
+.nav-item{color:#958D94}
+.nav-item.active{
+  color:#F0E8EC;
+  background:rgba(214,178,175,.09);
+}
+.toast,.update-banner{background:#0A111C;color:#FFF}
+.toast button,.update-banner button{background:#D6B2AF;color:#30242B}
+.version{color:#857D84}
+.settings-card .danger{color:#D58F99}
+
+/* Mantener el rosa como acento, no como fuente de luz */
+.section-heading p,.section-heading>span,.habit-copy small,.training-copy small,
+.soft-title p,.progress-head small,.wellbeing-summary span,.weekdays span,
+.calendar-legend,.day-detail,.health-note p,.reflection-card small{color:var(--muted)}
+
+@media (prefers-color-scheme:dark){
+  html,body{color-scheme:dark}
+}
