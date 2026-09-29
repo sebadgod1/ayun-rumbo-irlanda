@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="t">
+<title id="t">Avatar de Ayün</title>
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#E8C6C1"/><stop offset="1" stop-color="#B98589"/></linearGradient></defs>
+<circle cx="64" cy="64" r="62" fill="url(#g)"/>
+<circle cx="64" cy="61" r="31" fill="#F6DED8"/>
+<path d="M36 58c2-24 18-39 31-39 19 0 33 15 31 40-7-10-18-16-31-16-13 0-23 5-31 15z" fill="#4E3B47"/>
+<path d="M36 57c-4 12-1 33 7 46 4 6 11 10 17 12-13-3-26-11-32-24-6-13-6-28 8-34z" fill="#4E3B47" opacity=".95"/>
+<path d="M94 55c8 8 10 24 5 37-5 13-17 21-31 24 7-3 14-8 18-14 7-12 10-30 8-47z" fill="#4E3B47" opacity=".95"/>
+<ellipse cx="53" cy="62" rx="3.2" ry="2.2" fill="#5A4650"/><ellipse cx="75" cy="62" rx="3.2" ry="2.2" fill="#5A4650"/>
+<path d="M56 76c5 4 11 4 16 0" fill="none" stroke="#B26F79" stroke-width="3" stroke-linecap="round"/>
+<path d="M44 99c6-9 13-14 20-14s14 5 20 14" fill="none" stroke="#7F6269" stroke-width="8" stroke-linecap="round"/>
+<circle cx="97" cy="29" r="10" fill="#FFF7F5" opacity=".8"/><path d="M93 29h8M97 25v8" stroke="#7F6269" stroke-width="2" stroke-linecap="round"/>
+</svg>
