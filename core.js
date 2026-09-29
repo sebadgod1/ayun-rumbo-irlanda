@@ -5,6 +5,10 @@
 })(typeof self !== 'undefined' ? self : this, function () {
   const HABITS = ['bed', 'vitaminD', 'iron', 'contraceptive', 'water', 'english'];
   const TRAINING_GOALS = { bike: 4, strength: 3 };
+  const LEGACY_DEFAULT_MINUTES = { bike: 40, strength: 45 };
+  const FOOD_XP = { nourishing: 10, mixed: 5, heavy: 0 };
+  const WEEKLY_BALANCE_XP = 30;
+  const WEEKLY_MOVEMENT_XP = 40;
 
   function dateKey(date = new Date()) {
     const y = date.getFullYear();
@@ -29,10 +33,16 @@
     return dateKey(startOfWeek(date));
   }
 
+  function clampMinutes(value) {
+    const n = Math.round(Number(value) || 0);
+    return Math.max(0, Math.min(600, n));
+  }
+
   function emptyDay() {
     return {
       habits: {},
       trainings: [],
+      trainingMinutes: { bike: 0, strength: 0 },
       food: null,
       mood: null,
       moodNote: '',
@@ -44,14 +54,24 @@
     const source = raw && typeof raw === 'object' ? raw : {};
     const habits = {};
     HABITS.forEach(id => { habits[id] = Boolean(source.habits?.[id]); });
-    const trainings = Array.isArray(source.trainings)
+
+    const legacyTrainings = Array.isArray(source.trainings)
       ? [...new Set(source.trainings.filter(id => Object.prototype.hasOwnProperty.call(TRAINING_GOALS, id)))]
       : [];
+
+    const trainingMinutes = { bike: 0, strength: 0 };
+    Object.keys(TRAINING_GOALS).forEach(id => {
+      const explicit = clampMinutes(source.trainingMinutes?.[id]);
+      trainingMinutes[id] = explicit || (legacyTrainings.includes(id) ? LEGACY_DEFAULT_MINUTES[id] : 0);
+    });
+    const trainings = Object.keys(TRAINING_GOALS).filter(id => trainingMinutes[id] > 0);
+
     const food = ['nourishing', 'mixed', 'heavy'].includes(source.food) ? source.food : null;
     const mood = [1, 2, 3, 4, 5].includes(Number(source.mood)) ? Number(source.mood) : null;
     return {
       habits,
       trainings,
+      trainingMinutes,
       food,
       mood,
       moodNote: String(source.moodNote || '').slice(0, 300),
@@ -76,13 +96,44 @@
     return base + (dayWon(record) ? 20 : 0);
   }
 
+  function sessionMinutes(record, type) {
+    if (!Object.prototype.hasOwnProperty.call(TRAINING_GOALS, type)) return 0;
+    const explicit = clampMinutes(record?.trainingMinutes?.[type]);
+    if (explicit > 0) return explicit;
+    return Array.isArray(record?.trainings) && record.trainings.includes(type)
+      ? LEGACY_DEFAULT_MINUTES[type]
+      : 0;
+  }
+
+  function trainingXpFor(type, minutes) {
+    const m = clampMinutes(minutes);
+    if (type === 'bike') {
+      if (m >= 90) return 40;
+      if (m >= 60) return 35;
+      if (m >= 40) return 25;
+      if (m >= 20) return 15;
+      return 0;
+    }
+    if (type === 'strength') {
+      if (m >= 60) return 35;
+      if (m >= 45) return 30;
+      if (m >= 30) return 20;
+      if (m >= 15) return 10;
+      return 0;
+    }
+    return 0;
+  }
+
   function trainingXp(record) {
-    const trainings = Array.isArray(record?.trainings) ? record.trainings : [];
-    return trainings.reduce((sum, id) => sum + (id === 'bike' ? 25 : id === 'strength' ? 30 : 0), 0);
+    return Object.keys(TRAINING_GOALS).reduce((sum, type) => sum + trainingXpFor(type, sessionMinutes(record, type)), 0);
+  }
+
+  function foodXp(record) {
+    return FOOD_XP[record?.food] || 0;
   }
 
   function totalDayXp(record) {
-    return dayXp(record) + trainingXp(record);
+    return dayXp(record) + trainingXp(record) + foodXp(record);
   }
 
   function daysUntil(target, now = new Date()) {
@@ -109,13 +160,47 @@
     for (let i = 0; i < 7; i += 1) {
       const d = new Date(start);
       d.setDate(start.getDate() + i);
-      if (days?.[dateKey(d)]?.trainings?.includes(type)) count += 1;
+      if (sessionMinutes(days?.[dateKey(d)], type) > 0) count += 1;
     }
     return count;
   }
 
+  function weeklyBalanceProgress(days, anchor = new Date()) {
+    const start = startOfWeek(anchor);
+    let logged = 0;
+    let positive = 0;
+    for (let i = 0; i < 7; i += 1) {
+      const d = new Date(start);
+      d.setDate(start.getDate() + i);
+      const food = days?.[dateKey(d)]?.food;
+      if (['nourishing', 'mixed', 'heavy'].includes(food)) logged += 1;
+      if (food === 'nourishing' || food === 'mixed') positive += 1;
+    }
+    const earned = logged >= 5 && positive >= 4;
+    return { logged, positive, earned, xp: earned ? WEEKLY_BALANCE_XP : 0 };
+  }
+
+  function weeklyMovementProgress(days, anchor = new Date()) {
+    const bike = weeklyTrainingCount(days, 'bike', anchor);
+    const strength = weeklyTrainingCount(days, 'strength', anchor);
+    const earned = bike >= TRAINING_GOALS.bike && strength >= TRAINING_GOALS.strength;
+    return { bike, strength, earned, xp: earned ? WEEKLY_MOVEMENT_XP : 0 };
+  }
+
+  function uniqueWeekStarts(days) {
+    return [...new Set(Object.keys(days || {}).map(key => weekKey(parseDate(key))))];
+  }
+
+  function totalWeeklyBonusXp(days) {
+    return uniqueWeekStarts(days).reduce((sum, key) => {
+      const anchor = parseDate(key);
+      return sum + weeklyBalanceProgress(days, anchor).xp + weeklyMovementProgress(days, anchor).xp;
+    }, 0);
+  }
+
   function totalXp(days) {
-    return Object.values(days || {}).reduce((sum, record) => sum + totalDayXp(record), 0);
+    const daily = Object.values(days || {}).reduce((sum, record) => sum + totalDayXp(record), 0);
+    return daily + totalWeeklyBonusXp(days);
   }
 
   function levelFromXp(xp) {
@@ -144,6 +229,9 @@
   return {
     HABITS,
     TRAINING_GOALS,
+    FOOD_XP,
+    WEEKLY_BALANCE_XP,
+    WEEKLY_MOVEMENT_XP,
     dateKey,
     parseDate,
     startOfWeek,
@@ -154,11 +242,17 @@
     dayPercent,
     dayWon,
     dayXp,
+    sessionMinutes,
+    trainingXpFor,
     trainingXp,
+    foodXp,
     totalDayXp,
     daysUntil,
     consecutiveWonDays,
     weeklyTrainingCount,
+    weeklyBalanceProgress,
+    weeklyMovementProgress,
+    totalWeeklyBonusXp,
     totalXp,
     levelFromXp,
     bestStreak
