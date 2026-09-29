@@ -12,7 +12,8 @@
   <link rel="icon" href="./icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="./icon.svg">
   <link rel="stylesheet" href="./styles.css?v=1.0.0">
-  <link rel="stylesheet" href="./dark.css?v=1.0.2">
+  <link rel="stylesheet" href="./dark.css?v=1.1.0">
+  <link rel="stylesheet" href="./features.css?v=1.1.0">
   <title>Ayün — Rumbo a Irlanda</title>
 </head>
 <body>
@@ -63,11 +64,11 @@
 
       <section class="soft-grid">
         <article class="soft-card">
-          <div class="soft-title"><span>🥗</span><div><h3>Cómo comiste hoy</h3><p>Sin calorías, sin culpa.</p></div></div>
+          <div class="soft-title"><span>🥗</span><div><h3>Cómo comiste hoy</h3><p>Suma por cuidarte; una comida más pesada nunca resta.</p></div></div>
           <div class="choice-row" id="food-choices">
-            <button data-food="nourishing">Nutritiva</button>
-            <button data-food="mixed">Mixta</button>
-            <button data-food="heavy">Más pesada</button>
+            <button data-food="nourishing">Nutritiva · +10 XP</button>
+            <button data-food="mixed">Mixta · +5 XP</button>
+            <button data-food="heavy">Más pesada · +0 XP</button>
           </div>
         </article>
 
@@ -101,6 +102,7 @@
       </div>
       <article class="progress-card"><div class="progress-head"><div><span>NIVEL ACTUAL</span><strong id="level-copy">Nivel 1</strong></div><small id="level-next">250 XP para el siguiente</small></div><div class="bar"><span id="level-bar"></span></div></article>
       <article class="progress-card"><h2>Movimiento esta semana</h2><div id="progress-training"></div></article>
+      <article class="progress-card"><h2>Bonos de la semana</h2><div id="progress-bonuses"></div></article>
       <article class="progress-card"><h2>Bienestar registrado</h2><div class="wellbeing-summary"><div><strong id="food-days">0</strong><span>días con alimentación registrada</span></div><div><strong id="mood-days">0</strong><span>días con ánimo registrado</span></div></div></article>
     </section>
 
@@ -115,7 +117,7 @@
       <article class="settings-card"><h2>Respaldo</h2><button id="export-json">Exportar respaldo JSON <span>›</span></button><label for="import-json">Importar respaldo JSON <span>›</span></label><input id="import-json" type="file" accept="application/json,.json" hidden><button id="export-csv">Exportar CSV <span>›</span></button></article>
       <article class="settings-card"><h2>Reinicio</h2><button id="reset-today">Reiniciar solo hoy <span>›</span></button><button id="reset-all" class="danger">Borrar todo <span>›</span></button></article>
       <article class="health-note"><strong>Sobre vitaminas y medicamentos</strong><p>Ayün solo registra si seguiste tu pauta habitual. No recomienda dosis, horarios ni cambios de tratamiento.</p></article>
-      <p class="version">AYÜN — RUMBO A IRLANDA · v1.0.2</p>
+      <p class="version">AYÜN — RUMBO A IRLANDA · v1.1.0</p>
     </section>
   </main>
 
@@ -129,7 +131,7 @@
   <div id="toast" class="toast" role="status" aria-live="polite"><span id="toast-message"></span><button id="undo-button">DESHACER</button></div>
   <aside id="update-banner" class="update-banner" hidden><span>Nueva versión disponible</span><button id="apply-update">ACTUALIZAR</button></aside>
 
-  <script src="./core.js?v=1.0.0" defer></script>
-  <script src="./app.js?v=1.0.0" defer></script>
+  <script src="./core.js?v=1.1.0" defer></script>
+  <script src="./app.js?v=1.1.0" defer></script>
 </body>
 </html>
