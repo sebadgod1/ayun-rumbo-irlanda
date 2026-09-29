@@ -1,0 +1,13 @@
+/* Ayün v1.1 — minutos de movimiento + XP de alimentación */
+.training-entry{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;margin-top:13px}
+.training-entry label{display:grid;gap:6px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.5px}
+.training-entry input{width:100%;min-height:42px;border:1px solid rgba(83,61,69,.13);border-radius:13px;background:rgba(239,229,225,.60);color:#4F3A43;padding:0 12px;outline:0;-moz-appearance:textfield}
+.training-entry input::-webkit-outer-spin-button,.training-entry input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.training-entry input:focus{border-color:#A5727D;box-shadow:0 0 0 3px rgba(165,114,125,.12)}
+.training-xp{min-width:66px;min-height:42px;padding:0 10px;border-radius:13px;display:grid;place-items:center;background:rgba(184,132,143,.15);color:#704E58;font-size:10px;font-weight:900}
+.training-actions{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:8px}
+.training-actions .training-toggle{margin-top:0}
+.training-remove{min-height:42px;padding:0 12px;border:1px solid rgba(152,90,101,.18);border-radius:14px;background:rgba(239,229,225,.38);color:#985A65;font-size:10px;font-weight:800}
+.choice-row button{line-height:1.25;padding:8px 10px}
+#progress-bonuses .training-progress-row span{font-weight:850}
+@media(max-width:560px){.training-entry{grid-template-columns:1fr auto}.training-actions{grid-template-columns:1fr auto}}
