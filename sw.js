@@ -1,7 +1,7 @@
 const CACHE_PREFIX = 'ayun-irlanda-';
-const CACHE = `${CACHE_PREFIX}shell-v1.0.0`;
+const CACHE = `${CACHE_PREFIX}shell-v1.0.1`;
 const ASSETS = [
-  './','./index.html','./styles.css?v=1.0.0','./core.js?v=1.0.0','./app.js?v=1.0.0',
+  './','./index.html','./styles.css?v=1.0.0','./dark.css?v=1.0.1','./core.js?v=1.0.0','./app.js?v=1.0.0',
   './manifest.webmanifest','./icon.svg','./assets/ayun-avatar.svg'
 ];
 self.addEventListener('install', event => { event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS))); });
